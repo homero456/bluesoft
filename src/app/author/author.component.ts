@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Author } from '../Models/author';
 import { AuthorService } from '../Services/author.service';
 import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
@@ -21,7 +22,7 @@ export class AuthorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hiddenAdd = true;
+    this.hiddenAdd = false;
     this.author = new Author();
 
   }
@@ -34,37 +35,50 @@ export class AuthorComponent implements OnInit {
     });
   };
   editAuthor(e: Author): void {
-    
-    this.hiddenAdd = true;   
-    this.author=e;
+
+    this.hiddenAdd = true;
+    this.author = e;
     console.log(this.author);
-    
+
     //localStorage.removeItem("editEmpId");
     //localStorage.setItem("editEmpId", e.id.toString());
     //this.router.navigate(['edit-emp']);
   };
   addAuthor(): void {
-    console.log(this.author);
-    this.serviceAuthor.saveAuthors(this.author).subscribe(s => {
-      this.author = new Author();
+    
 
-      alert("Author Saved!");
+    if (this.author.id == 0) {
+      this.serviceAuthor.saveAuthors(this.author).subscribe(s => {
+        this.author = new Author();
 
-      this.hiddenAdd = false;
-      this.serviceAuthor.getAuthors().subscribe(s => {
-        this.listAuthors = s;
-        console.log(this.listAuthors);
+        alert("Author Saved!");
+
+        this.hiddenAdd = false;
+        this.serviceAuthor.getAuthors().subscribe(s => {
+          this.listAuthors = s;
+          console.log(this.listAuthors);
+        });
+
       });
+    }else{
+      this.serviceAuthor.editAuthors(this.author).subscribe(s => {
+        this.author = new Author();
+        alert("Author Edited!");
+        this.hiddenAdd = false;
+        this.serviceAuthor.getAuthors().subscribe(s => {
+          this.listAuthors = s;
+          console.log(this.listAuthors);
+        });
+      });
+    }
 
-    });
-    //this.router.navigate(['add-emp']);
   };
 
   showAddAuthor(): void {
-    this.hiddenAdd = true;   
+    this.hiddenAdd = true;
   }
   cancelAddAuthor(): void {
-    this.hiddenAdd = false;   
+    this.hiddenAdd = false;
     this.author = new Author();
   }
 

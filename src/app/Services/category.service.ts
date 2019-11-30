@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { Category } from '../Models/category';
+import { Categoria } from '../Models/categoria';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CategoryService {
 
   public result: any;
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:5000/api';
+    this.url = 'http://localhost:5000/api/Library';
    }
   public url : string;
 
@@ -20,12 +21,12 @@ export class CategoryService {
   }
 
 
-  saveCategory(category: Category) {
+  saveCategory(category: Categoria) {
   
     return this.http.post<any>(this.url+'/saveCategories', category);
   }
 
-  editCategory(category: Category) {
+  editCategory(category: Categoria) {
   
     return this.http.put<any>(this.url+'/updateCategories/'+category.id, category);
   }

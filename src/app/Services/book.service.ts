@@ -10,7 +10,7 @@ export class BookService {
 
   public result: any;
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:5000/api';
+    this.url = 'http://localhost:5000/api/Library';
    }
   public url : string;
 
@@ -33,5 +33,10 @@ export class BookService {
   deleteBook(id: string) {
     
     return this.http.delete<any>(this.url+'/deleteBooks/'+id);
+  }
+
+  searchBook(text: string):Observable<any>{
+    
+    return this.http.get<any>(this.url+'/searchBooks/'+text);
   }
 }

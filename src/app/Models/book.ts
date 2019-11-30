@@ -1,11 +1,14 @@
-import { Category } from './category';
+
 import { Author } from './author';
+import { Categoria } from './categoria';
+
 
 export class Book {
     
-    public id:BigInteger;
-    public Name:string;
-    public Category:Category;   
-    public Author:Author;   
+    public id:number;
+    public name:string;
+    public category:Categoria;   
+    public author:Author;   
+    public isbn:string;
     
 }

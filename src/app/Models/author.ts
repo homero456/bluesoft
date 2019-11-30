@@ -1,7 +1,8 @@
 export class Author {
     
-    public id:BigInteger;
+    public id:number;
     public name:string;
+    public lastName:string;
     public birth:Date;   
     
 }
