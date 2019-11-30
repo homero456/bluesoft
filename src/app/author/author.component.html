@@ -1,0 +1,50 @@
+<div class="col-md-3"></div>
+
+<div class="row" [hidden]="!hiddenAdd">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div>
+      <h2>Add</h2>
+      <div class="form-group">
+        <label for="Name">Name:</label>
+        <input placeholder="Name" name="Name" class="form-control" id="Name" [(ngModel)]="author.name"  >
+      </div>
+
+      <div class="form-group">
+        <label for="birth">Birth:</label>
+        <input placeholder="Birth" name="birth" class="form-control" id="birth" [(ngModel)]="author.birth" >
+      </div>
+
+      <button class="btn btn-success" role="button" (click)="addAuthor()">Save</button>
+      <button class="btn btn-danger" role="button" (click)="cancelAddAuthor()">Cancel</button>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+
+<div align="center" [hidden]="hiddenAdd">
+
+  <table>
+    <tr>
+      <td style="text-align: left">
+        <button class="btn btn-danger" (click)="showAddAuthor()"> Add Author</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Id</td>
+      <td>Name</td>
+      <td>Birth</td>
+      <td>Delete</td>
+      <td>Edit</td>
+    </tr>
+    <tr *ngFor="let e of listAuthors">
+      <td>{{e.id}}</td>
+      <td>{{e.name}}</td>
+      <td>{{e.birth}}</td>
+      <td><button class="btn btn-danger" (click)="deleteAuthor(e)"> Delete</button>
+        <button class="btn btn-info" (click)="editAuthor(e)" style="margin-left: 20px;"> Edit</button></td>
+    </tr>
+  </table>
+</div>
+<div class="col-md-3"></div>
